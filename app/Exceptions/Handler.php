@@ -37,12 +37,9 @@ class Handler extends ExceptionHandler
         switch ($guard)
         {
             case 'admin':
-                $login = 'auth.showAdminLoginForm';
+                $login = 'auth.admin.login';
                 break;
 
-            case 'provider':
-                $login = 'provider.showProviderLoginForm';
-                break;
 
             default:
                 $login = 'login';

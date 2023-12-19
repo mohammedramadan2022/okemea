@@ -9,7 +9,8 @@ class StoreCountryRequest extends FormRequest
     public function rules(): array
     {
         return array(
-            'name'=>['required' , 'string' , 'unique:countries,name']
+            'name'=>['required' , 'string' , 'unique:countries,name'],
+            'country_code'=>['required' , 'string' , 'unique:countries,country_code']
 
         );
     }

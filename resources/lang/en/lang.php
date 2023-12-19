@@ -64,6 +64,8 @@
 		'Support Ticket' => 'Support Ticket',
 		'Cities' => 'Cities',
 		'Countries' => 'Countries',
+		'Devices' => 'Devices',
+		'Settings' => 'Settings',
 
 	]
 ?>

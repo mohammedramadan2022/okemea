@@ -17,10 +17,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+
+
+    protected $guarded = [
+        'id',
     ];
 
     /**
@@ -42,4 +42,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function devices()
+    {
+        return $this->belongsToMany(Device::class)->withPivot('purchase_date', 'notes', 'city_id' , 'file_path' , 'image','carton_image' ,'invoice_image');
+    }
+
+    public function city(){
+
+        return $this->belongsTo(City::class);
+    }
+
+
 }

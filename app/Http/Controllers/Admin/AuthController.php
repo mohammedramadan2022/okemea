@@ -34,13 +34,10 @@ class AuthController extends Controller
     public function postLogin(AdminLoginRequest $request)
     {
         $credentials = $request->only('username', 'password');
-
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->get('remember'))) {
-
 
                 return redirect()->intended('/admin');
             } else {
-            dd(1454);
             return redirect()->route('auth.admin.login')->withErrors(['error' => 'Invalid credentials']);
         }
     }

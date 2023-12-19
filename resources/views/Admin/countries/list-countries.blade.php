@@ -1,5 +1,5 @@
 @extends('layouts.simple.master')
-@section('title', 'Product list')
+@section('title', 'Countries list')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/datatables.css')}}">
@@ -29,7 +29,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <a href="{{route('countries.create')}}" class="btn btn-success btn-xs" type="button"
-                                        data-original-title="btn btn-info btn-xs" title="">Add
+                                   data-original-title="btn btn-info btn-xs" title="">Add
                                 </a>
                             </div>
                             <div class="table-responsive">
@@ -38,6 +38,7 @@
                                     <tr class="double">
                                         <th>#</th>
                                         <th>name</th>
+                                        <th>Country Code</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -47,13 +48,21 @@
                                         <tr>
                                             <td>{{(($countries->currentpage() - 1) * $countries->perpage()) + $loop->iteration}}</td>
                                             <td>{{$country->name}}</td>
+                                            <td>{{$country->country_code}}</td>
 
-                                            <td>
-                                                <button class="btn btn-danger btn-xs" type="button"
-                                                        data-original-title="btn btn-danger btn-xs" title="">Delete
-                                                </button>
-                                                <a class="btn btn-success btn-xs"  href="{{route('countries.edit' , $country->id)}}" type="button"
-                                                        data-original-title="btn btn-danger btn-xs" title="">Edit
+                                            <td style="display: inline-flex">
+                                                <form action="{{route('countries.destroy' , $country->id)}}" method="post" class="m-1">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger btn-xs" type="submit"
+                                                            data-original-title="btn btn-danger btn-xs" title="">Delete
+                                                    </button>
+                                                </form>
+
+
+                                                <a class="btn btn-success btn-xs m-1"
+                                                   href="{{route('countries.edit' , $country->id)}}" type="button"
+                                                   data-original-title="btn btn-danger btn-xs" title="">Edit
                                                 </a>
                                             </td>
                                         </tr>

@@ -21,24 +21,13 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Create Countrty</h5>
+                        <h5>Create Country</h5>
                     </div>
                     <div class="card-body">
                         <form class="needs-validation" novalidate="" method="post" action="{{route('countries.store')}}">
                             @csrf
 
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom01">Name</label>
-                                    <input class="form-control @error('name') is-invalid @enderror" id="validationCustom01" name="name" type="text" placeholder="Name" required="">
-                                    @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    <div class="valid-feedback">Looks good!</div>
-                                </div>
-
-                            </div>
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                           @include('Admin::countries.form')
                         </form>
                     </div>
                 </div>

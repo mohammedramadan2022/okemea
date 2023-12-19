@@ -15,6 +15,7 @@ class CountrySeeder extends Seeder
     {
         $country = Country::create([
             'name' => 'Saudi Arabia',
+            'country_code' => '+996',
 
 
         ]);

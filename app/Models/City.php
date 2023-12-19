@@ -10,4 +10,7 @@ class City extends Model
     use HasFactory;
 
     protected $guarded= array('id');
+    public function country(){
+        return $this->belongsTo(Country::class)->withTrashed();
+    }
 }

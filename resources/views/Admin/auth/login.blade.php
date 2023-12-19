@@ -20,7 +20,7 @@
 								<div class="card-body">
 									<div class="cont text-center">
 										<div>
-                                            <form method="POST" action="{{ route('auth.postLogin') }}">
+                                            <form method="POST" action="{{ route('auth.admin.postLogin') }}">
                                                 @csrf
 												<h4>LOGIN</h4>
 												<h6>Enter your Username and Password</h6>
