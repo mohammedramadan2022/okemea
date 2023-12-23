@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CountryController;
 use App\Http\Controllers\Web\GuaranteeController;
+use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\PersonalController;
-use App\Models\Web\AuthController;
-use App\Models\Web\HomeController;
 use Illuminate\Support\Facades\Route;
 
 

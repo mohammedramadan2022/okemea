@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Web;
+namespace App\Http\Controllers\Web;
 
 use App\Facades\SMS\Taqnyat;
 use App\Facades\Traits\HelperTrait;

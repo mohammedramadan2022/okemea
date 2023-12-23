@@ -44,7 +44,7 @@ class Taqnyat
         $sender = static::$sendername;
         $smsId = '';
         $message =$taqnyt->sendMsg($body, $recipients, $sender, $smsId);
-
+dd($message);
 
         return (object)['code' => json_decode($message)->statusCode, 'status' => true, 'message' => json_decode($message)->messageId ?? '' ];
     }
