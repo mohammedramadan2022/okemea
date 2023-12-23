@@ -2,6 +2,8 @@
 
 namespace App\Models\Web;
 
+use App\Facades\SMS\Taqnyat;
+use App\Facades\Traits\HelperTrait;
 use App\Http\Requests\Web\Auth\RegisterRequest;
 use App\Http\Requests\Web\Auth\verifyRequest;
 use App\Models\Country;
@@ -15,6 +17,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class AuthController extends Model
 {
     use HasFactory;
+    use HelperTrait;
 
     public function showLoginForm()
     {
@@ -29,14 +32,19 @@ class AuthController extends Model
         $user = User::where('mobile', $request->mobile)->first();
 
         if ($user) {
-            $user->update(['verfaication_code' => 1234]);
+$verificationCode =$this->generateRandomNumber(4);
+            Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
+
+            $user->update(['verification_code' => $verificationCode]);
             //send mobile code
             Alert::success('مرحبا', 'ادخل كود التحقق المرسل لجوالك');
 
             return redirect()->route('auth.verifyLogin', $user);
         } else {
 
-            Alert::error('عذرا', 'جوال خاطىء');
+            Alert::error('عذرا', 'يرجى كتابة رقم الجوال بالصيغة التالية"
+
+5xxxxxxxx');
 
             return back()->with('error', 'wrong mobile');
         }
@@ -65,7 +73,10 @@ $user = User::findorFail($userId);
     {
 
         $user = User::create($request->validated());
-        $user->update(['verification_code' => 1234]);
+
+        $verificationCode =$this->generateRandomNumber(4);
+        Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
+        $user->update(['verification_code' => $verificationCode]);
         Alert::success('مرحبا', 'ادخل كود التحقق المرسل لجوالك');
         return redirect()->route('auth.verifyLogin', $user);
 
@@ -75,7 +86,7 @@ $user = User::findorFail($userId);
     {
 
         $user = User::findOrFail($request->user_id);
-        $verification_code = $request->verify1.$request->verify2.$request->verify3.$request->verify4;
+        $verification_code = $request->verificationCode;
         if ($verification_code == $user->verification_code) {
           Auth::guard('web')->loginUsingId($user->id);
           return redirect('/');
@@ -86,5 +97,15 @@ $user = User::findorFail($userId);
 
     }
 
+
+    public function logout()
+    {
+
+        Auth::logout();
+
+        return redirect()->route('/');
+
+
+    }
 
 }

@@ -20,6 +20,48 @@ header{
     }
 }
 
+button{
+    &:focus{
+        box-shadow: none !important;
+    }
+}
+
+.modal{
+    .btn-close{
+        margin: unset !important;
+    }
+}
+
+.visa-card{
+    height: 320px;
+    width: 640px;
+    max-width: 100%;
+    // background-image: linear-gradient(to right, #202020, #2A2A2A);
+    background-color: #202020;
+    border-radius: 15px;
+    padding: 20px 30px;
+    .visa-logo{
+        height: 50px;
+    }
+}
+
+.select2-container{
+    width: 100% !important;
+}
+
+.select2-selection__rendered{
+    padding-top: 3px;
+}
+
+.select2-selection, .select2-container{
+    height: 35px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    height: 35px !important;
+}
+
+
 section{
     padding: 60px 0px;
     .tab-links{
@@ -153,4 +195,4 @@ footer{
     padding: 10px 0 25px;
 }
 
-@import 'responsive'
+@import 'responsive';

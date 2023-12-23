@@ -9,7 +9,8 @@ class addGuaranteeRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
+
+return [
             "device_id" => ['required'],
             "purchase_date" => ['required'],
             "invoice_image" => ['required'],

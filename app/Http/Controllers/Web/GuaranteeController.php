@@ -28,6 +28,7 @@ class GuaranteeController extends Controller
         $devices = Device::Active()->get();
         $countries = Country::all();
 
+
         return view('Web::guarantee.add-guarantee', compact('devices', 'countries'));
 
     }

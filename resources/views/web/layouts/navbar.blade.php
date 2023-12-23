@@ -17,7 +17,7 @@
                     @endauth
                     @auth('web')
                          <li class="nav-item">
-                      <a class="nav-link text-acent me-5 font-regular" href="#">تسجيل الخروج</a>
+                      <a class="nav-link text-acent me-5 font-regular" href="{{route('logout')}}">تسجيل الخروج</a>
                     </li>
 
                     @else

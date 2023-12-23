@@ -23,11 +23,14 @@ Route::get('ajax-getCountryCities/{countryId}', [CountryController::class, 'ajax
 
 
 Route::group(['middleware' => ['auth:web']], function () {
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
     Route::get('guarantees', [GuaranteeController::class, 'guarantees'])->name('guarantees');
     Route::get('add-guarantee', [GuaranteeController::class, 'addGuarantee'])->name('add-guarantee');
     Route::post('store-guarantee', [GuaranteeController::class, 'storeGuarantee'])->name('store-guarantee');
     Route::get('personal-information', [PersonalController::class, 'personalInformation'])->name('personal-information');
     Route::post('update-personal-information', [PersonalController::class, 'updatePersonalInformation'])->name('update-personal-information');
+    Route::get('ajax-sendVerificationCode', [PersonalController::class, 'ajaxSendVerificationCode'])->name('ajax-sendVerificationCode');
 
 
 });

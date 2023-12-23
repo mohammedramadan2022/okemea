@@ -73,6 +73,9 @@
                                     </tbody>
                                 </table>
                             </div>
+                            
+                                                    {!! $devices->appends(['sort' => 'id'])->onEachSide(5)->links() !!}
+
                         </div>
                     </div>
                 </div>
