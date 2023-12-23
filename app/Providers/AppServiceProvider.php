@@ -20,13 +20,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         define('name', config('app.name'));
-        
+
             Paginator::defaultView('pagination::default');
         Paginator::useBootstrap();
 
 
-        $this->loadViewsFrom(base_path('resources/views/admin'), 'Admin');
-        $this->loadViewsFrom(base_path('resources/views/web'), 'Web');
+        $this->loadViewsFrom(base_path('resources/views/Admin'), 'Admin');
+        $this->loadViewsFrom(base_path('resources/views/Web'), 'Web');
 
     }
 }

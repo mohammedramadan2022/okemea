@@ -38,14 +38,15 @@ class Taqnyat
     public static function send($number, $message , $name): object
     {
         self::auth();
-
         $taqnyt = new \TaqnyatSms(static::$bearer);
         $body = 'Okema Verification Code ' .$message;
         $recipients = [Str::replace('+966','5' ,$number )];
         $sender = static::$sendername;
         $smsId = '';
         $message =$taqnyt->sendMsg($body, $recipients, $sender, $smsId);
-        return (object)['code' => json_decode($message)->statusCode, 'status' => true, 'message' => json_decode($message)->messageId];
+
+
+        return (object)['code' => json_decode($message)->statusCode, 'status' => true, 'message' => json_decode($message)->messageId ?? '' ];
     }
 
     private static function auth(): string
