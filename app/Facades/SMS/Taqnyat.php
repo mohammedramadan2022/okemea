@@ -40,11 +40,12 @@ class Taqnyat
         self::auth();
         $taqnyt = new \TaqnyatSms(static::$bearer);
         $body = 'Okema Verification Code ' .$message;
-        $recipients = [Str::replace('+966','5' ,$number )];
+
+
+        $recipients = [Str::replace('+966','' ,$number )];
         $sender = static::$sendername;
         $smsId = '';
         $message =$taqnyt->sendMsg($body, $recipients, $sender, $smsId);
-dd($message);
 
         return (object)['code' => json_decode($message)->statusCode, 'status' => true, 'message' => json_decode($message)->messageId ?? '' ];
     }

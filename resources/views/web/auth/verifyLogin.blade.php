@@ -36,6 +36,9 @@
                               <h4 class="font-regular fw-bold letter-spacing-normal text-center" id="counter"></h4>
                             </span>
                             <div class="form-group text-center resend-link">
+
+                                <p id="countdown"></p>
+
                                 <a href="#"
                                    class="resend_otp resend-link-2 btn bg-primary text-acent form-control letter-spacing-normal fw-regular font-normal">إعادة
                                     إرسال الرمز</a>
@@ -50,6 +53,16 @@
         </div>
     </div>
 </section>
+
+@section('scripts')
+
+    <script>
+        // Set the countdown time in seconds
+        $(document).ready(function () {
+         
+        });
+    </script>
+@endsection
 
 
 

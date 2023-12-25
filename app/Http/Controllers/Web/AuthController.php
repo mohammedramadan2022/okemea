@@ -33,7 +33,7 @@ class AuthController extends Model
 
         if ($user) {
 $verificationCode =$this->generateRandomNumber(4);
-            Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
+//            Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
 
             $user->update(['verification_code' => $verificationCode]);
             //send mobile code
