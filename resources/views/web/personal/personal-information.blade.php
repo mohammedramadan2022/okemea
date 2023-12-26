@@ -23,15 +23,25 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-lg-9 col-xl-9 col-12">
-
+                    <form action="{{route('update-personal-information')}}" method="post">
+                        @csrf
                     <div class="row d-sm-flex">
                         <div class="col-md-3 col-lg-3 col-xl-3 col-12 order-2-sm d-flex align-items-end pb-4">
-                            <form action="" class="verify">
-                                <button class="btn bg-primary text-acent letter-spacing-normal fw-bold form-control verify">
-                                    تحقق
-                                </button>
+
+
+                            <div class="clearfix"></div>
+                            <div class="form-group text-center resend-link ">
+                                <p style="color: black !important;"> <span id="timer"></span></p>
+
+                                <a href=""onclick="resendCode()"
+                                   class="resend_otp  btn bg-primary text-acent letter-spacing-normal fw-bold form-control verify   resend-link-1 text-primary letter-spacing-normal fw-bold font-regular">
+                                تحقق</a>
                                 <input type="text" class="form-control mt-3 text-center">
-                            </form>
+
+                            </div>
+
+
+
                         </div>
                         <div class="col-md-9 col-lg-9 col-xl-9 col-12">
                             <div class="mx-auto">
@@ -43,8 +53,7 @@
                                         <h3 class="font-regular mt-3 fw-bold">تعديل البيانات</h3>
                                     </div>
                                     <div class="form-div">
-                                        <form action="{{route('update-personal-information')}}" method="post">
-                                            @csrf
+
                                             <div class="form-group text-start">
                                                 <label class="fw-bold fs-sm mb-1" for="name">الإسم</label>
                                                 <input type="text" name="name" id="name" class="form-control"
@@ -117,13 +126,13 @@
                                                     تعديل البيانات
                                                 </button>
                                             </div>
-                                        </form>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    </form>
                 </div>
             </div>
         </div>
@@ -133,46 +142,60 @@
 
 @section('scripts')
     <script>
+        var countdownTimer;
 
-        $(document).on('click', '#sendCode', function () {
+        function startCountdownTimer(duration, display) {
 
-            var mobile = $('#mobile').val();
-            var route = "{{route('ajax-sendVerificationCode')}}"
+            var timer = duration, minutes, seconds;
+            countdownTimer = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(countdownTimer);
+                    document.getElementById("verificationCodeForm").submit();
+                }
+            }, 1000);
+        }
+
+        function resendCode() {
+
+            var userId = $('#user_id').val();
+
+
+
+
+            var route = "{{route('ajax-sendVerificationCode')}}";
             var CSRF_TOKEN = "{{csrf_token()}}";
+            console.log(route)
             $.ajax({
                 url: route,
-                type: "GET",
+                type: "get",
                 dataType: "json",
-                data: {_token: CSRF_TOKEN, mobile},
+                data: {_token: CSRF_TOKEN , 'user_id': userId},
                 success: function (response) {
-                    $('#verify_mobile').val(mobile);
+                    console.log(response)
 
-                    $('#sendCode').text("{{__('Resend Code')}}")
-
-
-                    Swal.fire(
-                        'Good job!',
-                        'Code sent to your Mobile',
-                        'success'
-                    )
-                    counter();
-                    //start countdown timer
-                    $('#verifyCode').removeAttr('hidden')
-
-                }, error: function (response) {
-                    $.each(response.responseJSON.errors, function (key, val) {
-                        Swal.fire(
-                            'Fail!',
-                            key + " :" + val[0],
-                            'error'
-                        )
-
-                    })
                 }
             });
 
 
-        });
+
+
+
+
+            clearInterval(countdownTimer);
+            startCountdownTimer(120, document.getElementById("timer"));
+        }
+    </script>
+
+    <script>
+
         function getCities() {
             var country_id = $('#country_id').val();
             var country_code = $('#country_id').find(':selected').data('country_code');

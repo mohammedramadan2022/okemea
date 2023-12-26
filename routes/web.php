@@ -20,6 +20,7 @@ Route::group(['as' => 'auth.'], function () {
 });
 
 Route::get('ajax-getCountryCities/{countryId}', [CountryController::class, 'ajaxGetCountryCities'])->name('ajax-getCountryCities');
+Route::get('ajax-sendVerificationCode', [PersonalController::class, 'ajaxSendVerificationCode'])->name('ajax-sendVerificationCode');
 
 
 Route::group(['middleware' => ['auth:web']], function () {
@@ -30,7 +31,6 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::post('store-guarantee', [GuaranteeController::class, 'storeGuarantee'])->name('store-guarantee');
     Route::get('personal-information', [PersonalController::class, 'personalInformation'])->name('personal-information');
     Route::post('update-personal-information', [PersonalController::class, 'updatePersonalInformation'])->name('update-personal-information');
-    Route::get('ajax-sendVerificationCode', [PersonalController::class, 'ajaxSendVerificationCode'])->name('ajax-sendVerificationCode');
 
 
 });

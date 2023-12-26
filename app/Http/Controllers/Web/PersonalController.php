@@ -7,6 +7,7 @@ use App\Facades\Traits\HelperTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Personal\UpdatePersonalInformationRequest;
 use App\Models\Country;
+use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -34,7 +35,11 @@ class PersonalController extends Controller
 
         $verificationCode =$this->generateRandomNumber(4);
 
-//        Taqnyat::send($request->country_code.$request->mobile, $verificationCode , auth()->user()->name);
+        $user_id = $request->user_id ?? auth()->user()->id;
+
+        $user = User::findOrFail($user_id);
+
+//        Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
 
 
         return response()->json(['status' => true, 'message' => __('code sent successfully')]);
