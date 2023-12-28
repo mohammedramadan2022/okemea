@@ -2,5 +2,5 @@
 
 @foreach($cities as $city)
 
-    <option value="{{$city->id}}" @if(auth()->guard('web')->check() && auth()->guard('web')->user()->city_id == $city->id) selected @endif>{{$city->city}}</option>
+    <option value="{{$city->id}}" @if(auth()->guard('web')->check() && auth()->guard('web')->user()->city_id == $city->id) selected @endif>{{$city->name_ar}}</option>
 @endforeach

@@ -1,18 +1,19 @@
 <?php
 
-namespace Database\Seeders;
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class CitySeeder extends Seeder
+
+class CityShhheeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+
+    public function run()
     {
+
         $cities =  [
             array('id' => '1','name_en' => 'Sant Julia de Loria','name_ar' => 'سانت جوليا دي لوريا','name_fr' => 'Sant Julia de Loria','code' => '06','country_id' => '1'),
             array('id' => '2','name_en' => 'Andorra la Vella','name_ar' => 'أندورا لا فيلا','name_fr' => 'Andorra la Vella','code' => '07','country_id' => '1'),
@@ -3392,10 +3393,10 @@ class CitySeeder extends Seeder
             array('id' => '3885','name_en' => 'Mashonaland Central','name_ar' => 'ماشونالاند الوسطى','name_fr' => 'Mashonaland Central','code' => '03','country_id' => '229'),
             array('id' => '3886','name_en' => 'Matabeleland South','name_ar' => 'ماتابيليلاند الجنوبية','name_fr' => 'Matabeleland Sud','code' => '07','country_id' => '229'),
             array('id' => '3888','name_en' => 'Masvingo','name_ar' => 'ماسفينغو','name_fr' => 'Masvingo','code' => '08','country_id' => '229')
-        ];
+            ];
 
 
-        DB::table('cities')->insert($cities);
+            DB::table('cities')->insert($cities);
 
     }
 }

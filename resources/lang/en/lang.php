@@ -66,6 +66,8 @@
 		'Countries' => 'Countries',
 		'Devices' => 'Devices',
 		'Settings' => 'Settings',
+		'waiting devices' => 'Waiting devices',
+		'Clients' => 'Clients',
 
 	]
 ?>

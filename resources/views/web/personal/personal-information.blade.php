@@ -80,7 +80,7 @@
                                                     </option>
                                                     @foreach($countries as $country)
                                                         <option value="{{$country->id}}" data-country_code="{{$country->dial_code}}"
-                                                                @if(auth()->user()->city->country_id == $country->id) selected @endif>{{$country->country_name}}</option>
+                                                                @if(auth()->user()->city->country_id == $country->id) selected @endif>{{$country->name_ar}}</option>
 
                                                     @endforeach
 
@@ -196,10 +196,19 @@
 
     <script>
 
+
+        $(document).ready(function () {
+            getCities();
+            $(document).on('change', '#country_id', function () {
+                getCities();
+            })
+
+        })
+
+
         function getCities() {
-            var country_id = $('#country_id').val();
+            var country_id = $('#country_id').find(':selected').val();
             var country_code = $('#country_id').find(':selected').data('country_code');
-            console.log(country_code, 7777)
             $('#country_code').val(country_code).change();
             var route = "{{route('ajax-getCountryCities' , ':id')}}";
             route = route.replace(':id', country_id);

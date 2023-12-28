@@ -20,7 +20,10 @@
     <!-- page-wrapper Start-->
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
       <!-- Page Header Start-->
-      @include('layouts.simple.header')
+
+        @include('sweetalert::alert')
+
+        @include('layouts.simple.header')
       <!-- Page Header Ends -->
       <!-- Page Body Start-->
       <div class="page-body-wrapper sidebar-icon">

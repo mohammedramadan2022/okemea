@@ -11,4 +11,16 @@ class DeviceUser extends Model
 
     protected $guarded = array('id');
     protected $table = 'device_user';
+
+    public function device()
+    {
+
+        return $this->belongsTo(Device::class);
+    }
+
+    public function user()
+    {
+
+        return $this->belongsTo(User::class);
+    }
 }

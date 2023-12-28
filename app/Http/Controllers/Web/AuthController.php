@@ -33,7 +33,7 @@ class AuthController extends Model
 
         if ($user) {
 $verificationCode =$this->generateRandomNumber(4);
-//            Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
+            Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
 
             $user->update(['verification_code' => $verificationCode]);
             //send mobile code
@@ -42,9 +42,7 @@ $verificationCode =$this->generateRandomNumber(4);
             return redirect()->route('auth.verifyLogin', $user);
         } else {
 
-            Alert::error('عذرا', 'يرجى كتابة رقم الجوال بالصيغة التالية"
-
-5xxxxxxxx');
+            Alert::error('عذرا', 'لا يوجد حساب مسجل لهذا الرقم');
 
             return back()->with('error', 'wrong mobile');
         }
@@ -89,7 +87,7 @@ $user = User::findorFail($userId);
         $verification_code = $request->verificationCode;
         if ($verification_code == $user->verification_code) {
           Auth::guard('web')->loginUsingId($user->id);
-          return redirect('/');
+          return redirect('guarantees');
         }
         Alert::error('عذرا', 'كود التحقق خاطىء');
 

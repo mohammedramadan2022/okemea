@@ -39,7 +39,7 @@ class PersonalController extends Controller
 
         $user = User::findOrFail($user_id);
 
-//        Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
+        Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
 
 
         return response()->json(['status' => true, 'message' => __('code sent successfully')]);

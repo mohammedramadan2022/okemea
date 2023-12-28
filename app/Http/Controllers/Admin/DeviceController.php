@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Devices\StoreDeviceRequest;
 use App\Http\Requests\Admin\Devices\UpdateDeviceRequest;
 use App\Models\Device;
+use App\Models\DeviceUser;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DeviceController extends Controller
 {
@@ -85,5 +88,22 @@ class DeviceController extends Controller
             $device->update(['status' => $device->status == 'active' ? 'inactive' : 'active']);
         }
         return back();
+    }
+
+    public function waitingDevices()
+    {
+
+        $devices = DeviceUser::where('status', 0)->paginate(10);
+
+        return view('Admin::devices.waiting-devices', compact('devices'));
+    }
+
+    public function deviceAccept($deviceId)
+    {
+        $device = DeviceUser::findOrFail($deviceId);
+        $device->update(['status' => 1]);
+        Alert::success('Congtars!', 'saved successfully');
+        return back();
+
     }
 }

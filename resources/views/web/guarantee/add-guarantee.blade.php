@@ -31,7 +31,7 @@
                                     <form action="{{route('store-guarantee')}}" method="post"
                                           enctype="multipart/form-data">
                                         @csrf
-                                        <div class="form-group text-start">
+                                        <div class="form-group text-start countrey-select">
                                             <label class="fw-bold fs-sm mb-1" for="product_id">رقم الصنف</label>
                                             <select name="device_id" class="form-control form-select" id="device_id">
                                                 <option selected="true" disabled="disabled" value="">إختر الجهاز

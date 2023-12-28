@@ -30,13 +30,14 @@
                     </div>
                     <div class="form-group text-start countrey-select">
                         <label class="fw-bold fs-sm mb-1" for="country">الدولة</label>
-                        <select  class="form-control form-select" id="country_id"
+                        <select class="form-control form-select" id="country_id"
                                 name="country_id">
                             <option selected="true" disabled="disabled" value="">إختر الدولة
                             </option>
                             @foreach($countries as $country)
                                 <option value="{{$country->id}}"
-                                        data-country_code= {{$country->dial_code}}>{{$country->country_name}}</option>
+                                        @if($country->id == 178) selected
+                                        @endif data-country_code= {{$country->dial_code}}>{{$country->name_ar}}</option>
                             @endforeach
                         </select>
                         @error('country_id')
@@ -67,14 +68,17 @@
                                 <option value="{{$country->dial_code}}">{{$country->dial_code}}</option>
 
                             @endforeach
-                            @error('mobile')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            @error('country_code')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-
                         </select>
+
+                        <div class="clearfix"></div>
+                        @error('mobile')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        @error('country_code')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+
+
                     </div>
                     <div class="form-group">
                         <button class="btn bg-primary text-acent form-control letter-spacing-normal">التسجيل</button>
@@ -90,36 +94,44 @@
     <script>
 
         $(document).ready(function () {
+
+            getCities();
             $(document).on('change', '#country_id', function () {
-                var country_id = $(this).find(':selected').val();
 
-                var country_code = $(this).find(':selected').data('country_code');
-
-
-                $('#country_code').val(country_code).change();
-
-                console.log(country_code, country_id)
-                var route = "{{route('ajax-getCountryCities' , ':id')}}";
-                route = route.replace(':id', country_id);
-                var CSRF_TOKEN = "{{csrf_token()}}";
-                console.log(route)
-                $.ajax({
-                    url: route,
-                    type: "get",
-                    dataType: "json",
-                    data: {_token: CSRF_TOKEN},
-                    success: function (response) {
-                        console.log(response)
-
-                        $('#city1').empty().append(response.view);
-                    }
-                });
-
+                getCities();
 
             })
 
 
         })
+
+
+        function getCities() {
+            var country_id = $('#country_id').find(':selected').val();
+
+            var country_code = $('#country_id').find(':selected').data('country_code');
+
+
+            $('#country_code').val(country_code).change();
+
+            console.log(country_code, country_id)
+            var route = "{{route('ajax-getCountryCities' , ':id')}}";
+            route = route.replace(':id', country_id);
+            var CSRF_TOKEN = "{{csrf_token()}}";
+            console.log(route)
+            $.ajax({
+                url: route,
+                type: "get",
+                dataType: "json",
+                data: {_token: CSRF_TOKEN},
+                success: function (response) {
+                    console.log(response)
+
+                    $('#city1').empty().append(response.view);
+                }
+            });
+
+        }
 
     </script>
 @endsection

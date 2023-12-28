@@ -25,7 +25,7 @@
                         <div class="form-group text-center resend-link ">
                             <a href=""onclick="resendCode()"
                                class="resend_otp   resend-link-1 text-primary letter-spacing-normal fw-bold font-regular">
-                                تحقق</a>
+                                اعاده ارسال الكود</a>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn bg-primary text-acent letter-spacing-normal mt-3 form-control">

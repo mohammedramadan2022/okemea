@@ -25,9 +25,11 @@
             <li class="dropdown">
 
 
-            <li class="dropdown"><a class="nav-link menu-title link-nav {{     Illuminate\Support\Str::startsWith(request()->route()->getName(), 'countries.') ? 'active' : '' }}" href="{{route('countries.index')}}"><i data-feather="cast"> </i><span>{{ trans('lang.Countries') }}</span></a></li>
-            <li class="dropdown"><a class="nav-link menu-title link-nav {{ Illuminate\Support\Str::startsWith(request()->route()->getName(), 'cities.')  ? 'active' : '' }}" href="{{route('cities.index')}}"><i data-feather="cast"> </i><span>{{ trans('lang.Cities') }}</span></a></li>
+            <li class="dropdown"><a class="nav-link menu-title link-nav {{     Illuminate\Support\Str::startsWith(request()->route()->getName(), 'waiting-devices') ? 'active' : '' }}" href="{{route('waiting-devices')}}"><i data-feather="cast"> </i><span>{{ trans('lang.waiting devices') }}</span></a></li>
+{{--            <li class="dropdown"><a class="nav-link menu-title link-nav {{     Illuminate\Support\Str::startsWith(request()->route()->getName(), 'countries.') ? 'active' : '' }}" href="{{route('countries.index')}}"><i data-feather="cast"> </i><span>{{ trans('lang.Countries') }}</span></a></li>--}}
+{{--            <li class="dropdown"><a class="nav-link menu-title link-nav {{ Illuminate\Support\Str::startsWith(request()->route()->getName(), 'cities.')  ? 'active' : '' }}" href="{{route('cities.index')}}"><i data-feather="cast"> </i><span>{{ trans('lang.Cities') }}</span></a></li>--}}
             <li class="dropdown"><a class="nav-link menu-title link-nav {{ Illuminate\Support\Str::startsWith(request()->route()->getName(), 'devices.')  ? 'active' : '' }}" href="{{route('devices.index')}}"><i data-feather="cast"> </i><span>{{ trans('lang.Devices') }}</span></a></li>
+            <li class="dropdown"><a class="nav-link menu-title link-nav {{ Illuminate\Support\Str::startsWith(request()->route()->getName(), 'clients')  ? 'active' : '' }}" href="{{route('clients')}}"><i data-feather="cast"> </i><span>{{ trans('lang.Clients') }}</span></a></li>
 
           </li>
 {{--          <li class="dropdown">--}}
