@@ -54,7 +54,7 @@
 
                                             <td>{{$client->city->country->name_ar ?? ''}}</td>
                                             <td>{{$client->city->name_ar ?? ''}}</td>
-                                        <td></td>
+                                        <td><a class="btn btn-info" href="{{route('client-devices' , $client->id)}}"> Devices</a></td>
 
                                     @endforeach
 
