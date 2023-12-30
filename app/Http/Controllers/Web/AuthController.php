@@ -73,7 +73,7 @@ $user = User::findorFail($userId);
         $user = User::create($request->validated());
 
         $verificationCode =$this->generateRandomNumber(4);
-        Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
+//        Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
         $user->update(['verification_code' => $verificationCode]);
         Alert::success('مرحبا', 'ادخل كود التحقق المرسل لجوالك');
         return redirect()->route('auth.verifyLogin', $user);

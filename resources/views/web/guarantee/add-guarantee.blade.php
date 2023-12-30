@@ -87,7 +87,7 @@
                                                 </option>
                                                 @foreach($countries as $country)
                                                     <option value="{{$country->id}}"
-                                                            data-country_code= {{$country->dial_code}}>{{$country->country_name}}</option>
+                                                            data-country_code= {{$country->dial_code}}>{{$country->name_ar}}</option>
                                                 @endforeach
                                             </select>
                                             @error('country_id')

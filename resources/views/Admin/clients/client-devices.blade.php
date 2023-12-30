@@ -63,6 +63,9 @@
                                               @if($device->status ==1)
                                                   Active
                                                 @else
+
+
+
                                                     <form action="{{route('devices.device-accept' , $device->id)}}"
                                                           method="post" class="m-1">
                                                         @csrf
@@ -74,7 +77,11 @@
                                                         </button>
                                                     </form>
 
+
+
+
                                                 @endif
+
 
 
 

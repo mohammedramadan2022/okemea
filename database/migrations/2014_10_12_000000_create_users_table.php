@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('verification_code')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

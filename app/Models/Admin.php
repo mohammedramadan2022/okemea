@@ -11,4 +11,10 @@ class Admin extends Authenticatable
     use HasFactory;
 
     protected $guarded =  array('id');
+
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

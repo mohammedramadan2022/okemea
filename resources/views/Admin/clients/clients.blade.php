@@ -39,6 +39,7 @@
                                         <th>country</th>
                                         <th>city</th>
                                         <th>devices</th>
+                                        <th>delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -54,8 +55,20 @@
 
                                             <td>{{$client->city->country->name_ar ?? ''}}</td>
                                             <td>{{$client->city->name_ar ?? ''}}</td>
-                                        <td><a class="btn btn-info" href="{{route('client-devices' , $client->id)}}"> Devices</a></td>
-
+                                            <td><a class="btn btn-info"
+                                                   href="{{route('client-devices' , $client->id)}}"> Devices</a></td>
+                                            <td>
+                                                <form action="{{route('client-delete' , $client->id)}}"
+                                                      method="post" class="m-1">
+                                                    @csrf
+                                                    <button
+                                                        class="btn btn-danger btn-xs"
+                                                        type="submit"
+                                                        data-original-title="btn btn-danger btn-xs"
+                                                        title="">Delete
+                                                    </button>
+                                                </form>
+                                            </td>
                                     @endforeach
 
                                     </tbody>

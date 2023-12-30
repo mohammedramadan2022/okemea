@@ -93,7 +93,7 @@ class DeviceController extends Controller
     public function waitingDevices()
     {
 
-        $devices = DeviceUser::where('status', 0)->paginate(10);
+        $devices = DeviceUser::whereHas('user')->where('status', 0)->paginate(10);
 
         return view('Admin::devices.waiting-devices', compact('devices'));
     }
@@ -102,6 +102,16 @@ class DeviceController extends Controller
     {
         $device = DeviceUser::findOrFail($deviceId);
         $device->update(['status' => 1]);
+        Alert::success('Congtars!', 'saved successfully');
+        return back();
+
+    }
+    public function deviceRefuse($deviceId)
+    {
+        $device = DeviceUser::findOrFail($deviceId);
+
+
+        $device->delete();
         Alert::success('Congtars!', 'saved successfully');
         return back();
 

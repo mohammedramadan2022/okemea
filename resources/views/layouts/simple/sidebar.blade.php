@@ -30,6 +30,7 @@
 {{--            <li class="dropdown"><a class="nav-link menu-title link-nav {{ Illuminate\Support\Str::startsWith(request()->route()->getName(), 'cities.')  ? 'active' : '' }}" href="{{route('cities.index')}}"><i data-feather="cast"> </i><span>{{ trans('lang.Cities') }}</span></a></li>--}}
             <li class="dropdown"><a class="nav-link menu-title link-nav {{ Illuminate\Support\Str::startsWith(request()->route()->getName(), 'devices.')  ? 'active' : '' }}" href="{{route('devices.index')}}"><i data-feather="cast"> </i><span>{{ trans('lang.Devices') }}</span></a></li>
             <li class="dropdown"><a class="nav-link menu-title link-nav {{ Illuminate\Support\Str::startsWith(request()->route()->getName(), 'clients')  ? 'active' : '' }}" href="{{route('clients')}}"><i data-feather="cast"> </i><span>{{ trans('lang.Clients') }}</span></a></li>
+            <li class="dropdown"><a class="nav-link menu-title link-nav {{ Illuminate\Support\Str::startsWith(request()->route()->getName(), 'admins.')  ? 'active' : '' }}" href="{{route('admins.index')}}"><i data-feather="cast"> </i><span>{{ trans('lang.Admins') }}</span></a></li>
 
           </li>
 {{--          <li class="dropdown">--}}

@@ -71,7 +71,16 @@
                                                     </button>
                                                 </form>
 
-
+                                                <form action="{{route('devices.device-refuse' , $device->id)}}"
+                                                      method="post" class="m-1">
+                                                    @csrf
+                                                    <button
+                                                        class="btn btn-danger btn-xs"
+                                                        type="submit"
+                                                        data-original-title="btn btn-danger btn-xs"
+                                                        title="">Refuse
+                                                    </button>
+                                                </form>
 
                                             </td>
                                         </tr>

@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Web;
 use App\Facades\Traits\HelperTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Guarantee\addGuaranteeRequest;
+use App\Mail\AddDeviceMail;
 use App\Models\Country;
 use App\Models\Device;
 use App\Models\DeviceUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GuaranteeController extends Controller
@@ -68,6 +70,8 @@ class GuaranteeController extends Controller
             $attachedDevice->save();
         }
 
+
+        $x = Mail::to(auth()->user()->email)->send(new AddDeviceMail(auth()->user()));
         Alert::success("تهانينا", 'تم اضافه جهازكم بنجاح');
         return back();
 

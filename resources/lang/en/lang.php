@@ -68,6 +68,7 @@
 		'Settings' => 'Settings',
 		'waiting devices' => 'Waiting devices',
 		'Clients' => 'Clients',
+		'Admins' => 'Admins',
 
 	]
 ?>

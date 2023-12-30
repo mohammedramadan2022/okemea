@@ -15,14 +15,14 @@
                     @csrf
                     <div class="form-group text-start">
                         <label class="fw-bold fs-sm mb-1" for="name">إسمك الكريم</label>
-                        <input type="text" name="name" id="name" class="form-control" value="">
+                        <input type="text" name="name" id="name" class="form-control" value="{{old('name')}}">
                         @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group text-start">
                         <label class="fw-bold fs-sm mb-1" for="email">البريد الإلكتروني</label>
-                        <input type="email" name="email" id="email" class="form-control" value="">
+                        <input type="email" name="email" id="email" class="form-control" value="{{old('email')}}">
                         @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -36,7 +36,7 @@
                             </option>
                             @foreach($countries as $country)
                                 <option value="{{$country->id}}"
-                                        @if($country->id == 178) selected
+                                        @if($country->id == 178 || $country->id == old('country_id')) selected
                                         @endif data-country_code= {{$country->dial_code}}>{{$country->name_ar}}</option>
                             @endforeach
                         </select>
@@ -61,11 +61,11 @@
                     </div>
                     <div class="form-group text-start position-relative">
                         <label class="fw-bold fs-sm mb-1" for="mobile_code">رقم الجوال</label>
-                        <input type="tel" id="mobile_code" class="form-control" value="" name="mobile">
+                        <input type="tel" id="mobile_code" class="form-control" value="{{old('mobile')}}" name="mobile">
                         <select name="country_code" id="country_code">
                             <option value="" selected="selected" disabled="disabled">+000</option>
                             @foreach($countries as $country)
-                                <option value="{{$country->dial_code}}">{{$country->dial_code}}</option>
+                                <option value="{{$country->dial_code}}" @if(old('country_code') == $country->dial_code)selected @endif>{{$country->dial_code}}</option>
 
                             @endforeach
                         </select>
@@ -108,6 +108,7 @@
 
         function getCities() {
             var country_id = $('#country_id').find(':selected').val();
+            var city_id = {{old('city_id') ?? 0 }};
 
             var country_code = $('#country_id').find(':selected').data('country_code');
 
@@ -116,14 +117,14 @@
 
             console.log(country_code, country_id)
             var route = "{{route('ajax-getCountryCities' , ':id')}}";
-            route = route.replace(':id', country_id);
+            route = route.replace(':id', country_id );
             var CSRF_TOKEN = "{{csrf_token()}}";
             console.log(route)
             $.ajax({
                 url: route,
                 type: "get",
                 dataType: "json",
-                data: {_token: CSRF_TOKEN},
+                data: {_token: CSRF_TOKEN ,'city_id': city_id},
                 success: function (response) {
                     console.log(response)
 
