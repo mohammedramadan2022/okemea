@@ -26,8 +26,10 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::resource('admins', AdminController::class);
     Route::get('waiting-devices', [DeviceController::class, 'waitingDevices'])->name('waiting-devices');
     Route::get('clients', [ClientController::class, 'clients'])->name('clients');
+    Route::get('deleted-clients', [ClientController::class, 'deletedClients'])->name('deleted-clients');
     Route::get('client-devices/{clientId}', [ClientController::class, 'clientDevices'])->name('client-devices');
     Route::post('client-delete/{clientId}', [ClientController::class, 'clientDelete'])->name('client-delete');
+    Route::post('client-force-delete/{clientId}', [ClientController::class, 'clientForceDelete'])->name('client-force-delete');
 
 
     Route::group(['as' => 'devices.', 'prefix' => 'devices'], function () {

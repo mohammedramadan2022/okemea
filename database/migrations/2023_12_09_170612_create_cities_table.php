@@ -12,13 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cities', function (Blueprint $table) {
-
-
             $table->increments('id');
-            $table->string('name_en');
-            $table->string('name_ar');
-            $table->string('name_fr');
-            $table->string('code');
+            $table->string('name');
             $table->string('country_id');
             $table->timestamps();
             $table->softDeletes();

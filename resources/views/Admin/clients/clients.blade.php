@@ -55,19 +55,36 @@
 
                                             <td>{{$client->city->country->name_ar ?? ''}}</td>
                                             <td>{{$client->city->name_ar ?? ''}}</td>
-                                            <td><a class="btn btn-info"
+                                            <td>
+                                                <a class="btn btn-info"
                                                    href="{{route('client-devices' , $client->id)}}"> Devices</a></td>
                                             <td>
-                                                <form action="{{route('client-delete' , $client->id)}}"
-                                                      method="post" class="m-1">
-                                                    @csrf
-                                                    <button
-                                                        class="btn btn-danger btn-xs"
-                                                        type="submit"
-                                                        data-original-title="btn btn-danger btn-xs"
-                                                        title="">Delete
-                                                    </button>
-                                                </form>
+
+                                               @if($client->deleted_at != null)
+
+                                                    <form action="{{route('client-force-delete' , $client->id)}}"
+                                                          method="post" class="m-1">
+                                                        @csrf
+                                                        <button
+                                                            class="btn btn-danger btn-xs"
+                                                            type="submit"
+                                                            data-original-title="btn btn-danger btn-xs"
+                                                            title="">Force Delete
+                                                        </button>
+                                                    </form>
+                                                @else
+                                                    <form action="{{route('client-delete' , $client->id)}}"
+                                                          method="post" class="m-1">
+                                                        @csrf
+                                                        <button
+                                                            class="btn btn-danger btn-xs"
+                                                            type="submit"
+                                                            data-original-title="btn btn-danger btn-xs"
+                                                            title="">Delete
+                                                        </button>
+                                                    </form>
+                                               @endif
+
                                             </td>
                                     @endforeach
 
