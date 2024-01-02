@@ -36,6 +36,7 @@
                                         <th class="font-xs bordered" scope="col">صورة الكرتون</th>
                                         <th class="font-xs bordered" scope="col">تاريخ الشراء</th>
                                         <th class="font-xs bordered" scope="col">تاريخ إنتهاء الضمان</th>
+                                        <th class="font-xs bordered" scope="col">notes</th>
                                         <th class="font-xs bg-white border-0" scope="col"></th>
                                     </tr>
                                     </thead>
@@ -51,6 +52,9 @@
                                                 <h5 class="font-xs fw-normal mb-0">{{Carbon::parse($userDevice->pivot->purchase_date)->addMonth($userDevice->warranty)->format('Y-m-d')}}</h5>
                                                 <span class="remaining-date font-xs">{{Carbon::parse($userDevice->pivot->purchase_date)->addMonth($userDevice->warranty)->diffInMonths(now()->format('Y-m-d'))}} شهر و {{Carbon::parse($userDevice->pivot->purchase_date)->addMonth($userDevice->warranty)->diffInDays(now()->format('Y-m-d')) %30}} أيام</span>
                                             </td>
+
+                                            <td class="font-xs py-3 bordered">{{$userDevice->pivot->notes}}</td>
+
                                             <td class="border-0">
                                                 <button class="btn btn-primary text-acent" type="button" data-bs-toggle="modal" data-bs-target="#guarantee_1">عرض الضمان</button>
                                                 <div class="modal fade" id="guarantee_1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

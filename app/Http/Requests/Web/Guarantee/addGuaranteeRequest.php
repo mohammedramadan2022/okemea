@@ -12,7 +12,7 @@ class addGuaranteeRequest extends FormRequest
 
 return [
             "device_id" => ['required'],
-            "purchase_date" => ['required'],
+            "purchase_date" => ['required','before:today'],
             "invoice_image" => ['required'],
             "image" => ['required'],
             "carton_image" => ['required'],

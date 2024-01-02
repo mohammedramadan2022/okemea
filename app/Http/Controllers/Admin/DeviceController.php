@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Devices\StoreDeviceRequest;
 use App\Http\Requests\Admin\Devices\UpdateDeviceRequest;
+use App\Mail\AcceptDeviceMail;
+use App\Mail\AddDeviceMail;
+use App\Mail\RefuseDeviceMail;
 use App\Models\Device;
 use App\Models\DeviceUser;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DeviceController extends Controller
@@ -102,6 +106,10 @@ class DeviceController extends Controller
     {
         $device = DeviceUser::findOrFail($deviceId);
         $device->update(['status' => 1]);
+
+        $x = Mail::to($device()->user->email)->send(new AcceptDeviceMail($device()->user));
+
+
         Alert::success('Congtars!', 'saved successfully');
         return back();
 
@@ -110,6 +118,7 @@ class DeviceController extends Controller
     {
         $device = DeviceUser::findOrFail($deviceId);
 
+        $x = Mail::to($device()->user->email)->send(new RefuseDeviceMail($device()->user));
 
         $device->delete();
         Alert::success('Congtars!', 'saved successfully');

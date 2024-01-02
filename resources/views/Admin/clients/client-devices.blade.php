@@ -40,6 +40,7 @@
                                         <th>carton image</th>
                                         <th>device image</th>
                                         <th>purchase dat</th>
+                                        <th>notes</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -54,11 +55,8 @@
                                             <td class="py-3 bordered"><img  src="{{url($device->file_path.'/'.$device->image)}}" height="70px" class="of-contain" alt="" loading="lazy"></td>
                                             <td class="py-3 bordered"><img  src="{{url($device->file_path.'/'.$device->invoice_image)}}" height="70px" class="of-contain" alt="" loading="lazy"></td>
                                             <td class="py-3 bordered"><img src="{{url($device->file_path.'/'.$device->carton_image)}}" height="70px" class="of-contain" alt="" loading="lazy"></td>
-
                                             <td>{{$device->purchase_date}}</td>
-
-
-
+                                            <td>{{$device->notes}}</td>
                                             <td style="display: inline-flex">
                                               @if($device->status ==1)
                                                   Active
