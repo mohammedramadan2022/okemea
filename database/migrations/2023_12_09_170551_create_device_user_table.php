@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('file_path')->nullable();
             $table->integer('status')->default(0)->comment('0 for waiting 1 for active 2 for refused');
             $table->date('purchase_date');
-            $table->string('notes');
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

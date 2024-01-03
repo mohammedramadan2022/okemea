@@ -16,7 +16,10 @@
                             <input type="tel" id="mobile_code" class="form-control" value="" name="mobile">
                             <select name="country_code" id="country_code">
 {{--                                <option value="" selected="selected" disabled="disabled">+000</option>--}}
-                                <option value="+966" selected="selected" disabled="disabled">+966</option>
+                                @foreach($countries as $country)
+                                    <option value="{{$country->dial_code}}" @if( $country->dial_code == '+966') selected @endif>{{$country->dial_code}}</option>
+
+                                @endforeach
 
                             </select>
                         </div>

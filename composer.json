@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "nesbot/carbon": "^2.72",
+        "proengsoft/laravel-jsvalidation": "^4.8",
         "realrashid/sweet-alert": "^7.1",
         "taqnyat/php": "^1.0"
     },

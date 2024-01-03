@@ -21,8 +21,8 @@ class AuthController extends Model
 
     public function showLoginForm()
     {
-
-        return view('Web::auth.login');
+$countries = Country::all();
+        return view('Web::auth.login' , compact('countries'));
     }
 
 
