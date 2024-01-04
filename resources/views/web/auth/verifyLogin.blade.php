@@ -22,7 +22,7 @@
                         <div class="verification-code--inputs d-flex align-items-center justify-content-center direction-ltr mb-4">
                             <p style="color: black !important;"> <span id="timer"></span></p>
                         </div>
-                        <div class="form-group text-center resend-link ">
+                        <div class="form-group text-center resend-link" disabled>
                             <a href=""onclick="resendCode()"
                                class="resend_otp   resend-link-1 text-primary letter-spacing-normal fw-bold font-regular">
                                 اعاده ارسال الكود</a>

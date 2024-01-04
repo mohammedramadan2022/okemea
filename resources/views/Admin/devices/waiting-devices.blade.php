@@ -39,7 +39,8 @@
                                         <th>invoice image</th>
                                         <th>carton image</th>
                                         <th>device image</th>
-                                        <th>purchase dat</th>
+                                        <th>purchase date</th>
+                                        <th>add date</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -56,9 +57,7 @@
                                             <td class="py-3 bordered"><img src="{{url($device->file_path.'/'.$device->carton_image)}}" height="70px" class="of-contain" alt="" loading="lazy"></td>
 
                                             <td>{{$device->purchase_date}}</td>
-
-
-
+                                            <td>{{Carbon::parse($device->pivot->created_at)->diffInMonths()}}</td>
                                             <td style="display: inline-flex">
                                                 <form action="{{route('devices.device-accept' , $device->id)}}"
                                                       method="post" class="m-1">

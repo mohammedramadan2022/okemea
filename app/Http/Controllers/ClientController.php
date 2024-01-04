@@ -49,6 +49,18 @@ class ClientController extends Controller
 
     }
 
+    public function clientRestore($clientId)
+    {
+
+        $client = User::where('id' , $clientId)->withTrashed()->first();
+        if ($client){
+           $client->restore();
+        }
+        Alert::success('Congrates!' ,'Delete Success');
+
+        return back();
+
+    }
     public function clientForceDelete($clientId)
     {
 

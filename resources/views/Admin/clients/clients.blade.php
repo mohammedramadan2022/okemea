@@ -72,6 +72,19 @@
                                                             title="">Force Delete
                                                         </button>
                                                     </form>
+
+                                                    <form action="{{route('client-restore' , $client->id)}}"
+                                                          method="post" class="m-1">
+                                                        @csrf
+                                                        <button
+                                                            class="btn btn-info btn-xs"
+                                                            type="submit"
+                                                            data-original-title="btn btn-info btn-xs"
+                                                            title="">Restore
+                                                        </button>
+                                                    </form>
+
+
                                                 @else
                                                     <form action="{{route('client-delete' , $client->id)}}"
                                                           method="post" class="m-1">

@@ -73,7 +73,8 @@ class GuaranteeController extends Controller
 
         $x = Mail::to(auth()->user()->email)->send(new AddDeviceMail(auth()->user()));
         Alert::success("تهانينا", 'تم اضافه جهازكم بنجاح');
-        return back();
+        return redirect()->route('guarantees');
+
 
 
     }

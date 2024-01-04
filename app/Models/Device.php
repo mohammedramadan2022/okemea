@@ -20,6 +20,6 @@ class Device extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('purchase_date', 'notes', 'city_id', 'file_path', 'image' , 'carton_image' ,'invoice_image');
+        return $this->belongsToMany(User::class)->withPivot('purchase_date', 'notes', 'city_id', 'file_path', 'image' , 'carton_image' ,'invoice_image' , '\');
     }
 }
