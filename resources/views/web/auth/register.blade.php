@@ -11,7 +11,7 @@
                     <h3 class="font-lg mt-3 fw-bold">تسجيل حساب جديد</h3>
                 </div>
 
-                <form action="{{route('auth.postRegister')}}" method="post" id="my-form">
+                <form action="{{route('auth.postRegister')}}" method="post">
                     @csrf
                     <div class="form-group text-start">
                         <label class="fw-bold fs-sm mb-1" for="name">إسمك الكريم</label>
@@ -135,13 +135,6 @@
         }
 
     </script>
-
-
-    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-
-    {!! JsValidator::formRequest('App\Http\Requests\Web\Auth\RegisterRequest' ,'#my-form' ); !!}
-
-
 @endsection
 
 

@@ -21,10 +21,31 @@ class RegisterRequest extends FormRequest
                     $isValid = preg_match('/^5\d{8}$/', $value);
 
                     if ($countryCode === '966' && !$isValid) {
-                        $fail('The mobile number must start with "5" followed by 8 digits for the selected country code.');
+                        $fail('الجوال يجب ان يبدأ ب 5 متبوعا ب 8 ارقام');
                     }
                 },
             ],
         ];
+    }
+
+
+
+    public function messages(): array
+    {
+        return [
+
+            'name.required'         => 'الاسم مطلوب',
+            'email.required'        => 'البريد الاكترونى مطلوب',
+            'email.unique'          => 'البريد الاكترونى مستخدم من قبل',
+            'country_id.required'   => 'برجاء اختيار الدوله',
+            'city_id.required'      => 'برجاء اختيار المدينة',
+            'country_code.required' => 'برجاء اختيار كود الدولة',
+            'mobile.required'       => 'الجوال مطلوب',
+            'mobile.unique'       => 'الجوال مستخدم من قبل',
+
+        ];
+
+
+
     }
 }

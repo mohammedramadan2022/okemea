@@ -17,7 +17,7 @@
                             <select name="country_code" id="country_code">
 {{--                                <option value="" selected="selected" disabled="disabled">+000</option>--}}
                                 @foreach($countries as $country)
-                                    <option value="{{$country->dial_code}}" @if( $country->dial_code == '+966') selected @endif>{{$country->dial_code}}</option>
+                                    <option value="{{$country->dial_code}}" @if(old('country_code') == $country->dial_code || $country->id == 178)selected @endif>{{$country->dial_code}}</option>
 
                                 @endforeach
 

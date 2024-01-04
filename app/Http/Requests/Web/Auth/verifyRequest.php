@@ -14,4 +14,15 @@ class verifyRequest extends FormRequest
 
         ];
     }
+
+    public function messages() : array {
+
+return array(
+"verificationCode.requied"=>'كود التفعيل مطلوب'
+
+
+);
+
+
+    }
 }

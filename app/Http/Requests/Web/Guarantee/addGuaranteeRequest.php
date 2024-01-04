@@ -20,4 +20,20 @@ return [
 
         ];
     }
+
+    public function messages() : array {
+
+
+        return array (
+'device_id.required'     => 'برجاءاختيار الجهاز',
+'purchase_date.required' => 'برجاء ادخال تاريخ الشراء',
+'purchase_date.before' => 'برجاء ادخال تاريخ سابق لتاريخ اليوم',
+'invoice_image.required' => 'برجاء ادخال  صوره الفاتورة',
+'image.required'         => 'برجاء ادخال  صوره الجهاز',
+'carton_image.required'  => 'برجاء ادخال  صوره الكرتونة',
+'city_id.required'       => 'برجاء اختيار المدينة',
+
+
+        );
+    }
 }
