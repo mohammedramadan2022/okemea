@@ -20,7 +20,7 @@ class GuaranteeController extends Controller
 
     public function guarantees()
     {
-        $userDevices = auth()->user()->devices;
+        $userDevices = DeviceUser::where('user_id',auth()->user()->id)->get();
 //        dd($userDevices);
        return view('Web::guarantee.guarantees', compact('userDevices' ));
 

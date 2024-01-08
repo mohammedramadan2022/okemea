@@ -21,8 +21,8 @@ class AuthController extends Model
 
     public function showLoginForm()
     {
-$countries = Country::all();
-        return view('Web::auth.login' , compact('countries'));
+        $countries = Country::all();
+        return view('Web::auth.login', compact('countries'));
     }
 
 
@@ -32,8 +32,8 @@ $countries = Country::all();
         $user = User::where('mobile', $request->mobile)->first();
 
         if ($user) {
-$verificationCode =$this->generateRandomNumber(4);
-            Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
+            $verificationCode = $this->generateRandomNumber(4);
+//            Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
 
             $user->update(['verification_code' => $verificationCode]);
             //send mobile code
@@ -52,7 +52,7 @@ $verificationCode =$this->generateRandomNumber(4);
 
     public function verifyLogin($userId)
     {
-$user = User::findorFail($userId);
+        $user = User::findorFail($userId);
 
         return view('Web::auth.verifyLogin', compact('user'));
     }
@@ -72,9 +72,9 @@ $user = User::findorFail($userId);
 
         $user = User::create($request->validated());
 
-        $verificationCode =$this->generateRandomNumber(4);
-        Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
-        $user->update(['verification_code' => $verificationCode]);
+        $verificationCode = $this->generateRandomNumber(4);
+//        Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
+        $user->update(['verificati  on_code' => $verificationCode]);
         Alert::success('مرحبا', 'ادخل كود التحقق المرسل لجوالك');
         return redirect()->route('auth.verifyLogin', $user);
 
@@ -86,8 +86,8 @@ $user = User::findorFail($userId);
         $user = User::findOrFail($request->user_id);
         $verification_code = $request->verificationCode;
         if ($verification_code == $user->verification_code) {
-          Auth::guard('web')->loginUsingId($user->id);
-          return redirect('guarantees');
+            Auth::guard('web')->loginUsingId($user->id);
+            return redirect('guarantees');
         }
         Alert::error('عذرا', 'كود التحقق خاطىء');
 

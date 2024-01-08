@@ -15,6 +15,7 @@ class UpdatePersonalInformationRequest extends FormRequest
             "country_id" => ['required', 'exists:countries,id'],
             "city_id" => ['required', 'exists:cities,id'],
             "country_code" => ['required'],
+            "verification_code" => ['required'],
             "mobile" => ['required', 'unique:users,mobile,'.auth()->user()->id],
         ];
     }
@@ -29,6 +30,7 @@ class UpdatePersonalInformationRequest extends FormRequest
 'country_id.required'   => 'برجاء اختيار الدولة',
 'city_id.required'      => 'برجاء اختيار المدينة',
 'country_code.required' => 'برجاء اختيار كود الدولة',
+'verification_code.required' => 'كود تفعيل خاطىء',
 'mobile.required'       => 'الجوال مطلوب',
 'mobile.unique'       => 'الجوال مستخدم من قبل',
 

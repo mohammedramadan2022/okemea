@@ -15,6 +15,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class PersonalController extends Controller
 {
     use HelperTrait;
+
     public function personalInformation(Request $request)
     {
 
@@ -24,24 +25,27 @@ class PersonalController extends Controller
 
     public function updatePersonalInformation(UpdatePersonalInformationRequest $request)
     {
-        auth()->user()->update($request->except('_token', 'mobile'));
 
-        Alert::success("تهانينا", 'تم تحديث البيانات بنجاح');
+        if (auth()->user()->verification_code == $request->verification_code) {
+
+            auth()->user()->update($request->except('_token', 'verification_code'));
+            Alert::success("تهانينا", 'تم تحديث البيانات بنجاح');
+
+        } else {
+            Alert::error("عذرا", 'كود تفعيل خاطىء');
+        }
         return back();
-
     }
 
-    public function ajaxSendVerificationCode(Request $request){
+    public function ajaxSendVerificationCode(Request $request)
+    {
 
-        $verificationCode =$this->generateRandomNumber(4);
-
+        $verificationCode = $this->generateRandomNumber(4);
         $user_id = $request->user_id ?? auth()->user()->id;
-
         $user = User::findOrFail($user_id);
-
-        Taqnyat::send($user->country_code.$user->mobile, $verificationCode , $user->name);
-
-
+//        Taqnyat::send($user->country_code.$user->mobile, $verificationCode, $user->name);
+        $user->verification_code = $verificationCode;
+        $user->save();
         return response()->json(['status' => true, 'message' => __('code sent successfully')]);
 
     }

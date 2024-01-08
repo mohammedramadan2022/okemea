@@ -44,16 +44,16 @@
 
                                     @foreach($userDevices as $userDevice)
                                         <tr class="text-center border-bottom-0 border-top-0 py-3 table-row-item">
-                                            <td class="py-3 bordered"><img  src="{{url($userDevice->pivot->file_path.'/'.$userDevice->pivot->image)}}" height="70px" class="of-contain" alt=""></td>
-                                            <td class="py-3 bordered"><img  src="{{url($userDevice->pivot->file_path.'/'.$userDevice->pivot->invoice_image)}}" height="70px" class="of-contain" alt=""></td>
-                                            <td class="py-3 bordered"><img src="{{url($userDevice->pivot->file_path.'/'.$userDevice->pivot->carton_image)}}" height="70px" class="of-contain" alt=""></td>
-                                            <td class="font-xs py-3 bordered">{{$userDevice->pivot->purchase_date}}</td>
+                                            <td class="py-3 bordered"><img  src="{{url($userDevice->file_path.'/'.$userDevice->image)}}" height="70px" class="of-contain" alt=""></td>
+                                            <td class="py-3 bordered"><img  src="{{url($userDevice->file_path.'/'.$userDevice->invoice_image)}}" height="70px" class="of-contain" alt=""></td>
+                                            <td class="py-3 bordered"><img src="{{url($userDevice->file_path.'/'.$userDevice->carton_image)}}" height="70px" class="of-contain" alt=""></td>
+                                            <td class="font-xs py-3 bordered">{{$userDevice->purchase_date}}</td>
                                             <td class="py-3 bordered">
-                                                <h5 class="font-xs fw-normal mb-0">{{Carbon::parse($userDevice->pivot->purchase_date)->addMonth($userDevice->warranty)->format('Y-m-d')}}</h5>
-                                                <span class="remaining-date font-xs">{{Carbon::parse($userDevice->pivot->purchase_date)->addMonth($userDevice->warranty)->diffInMonths(now()->format('Y-m-d'))}} شهر و {{Carbon::parse($userDevice->pivot->purchase_date)->addMonth($userDevice->warranty)->diffInDays(now()->format('Y-m-d')) %30}} أيام</span>
+                                                <h5 class="font-xs fw-normal mb-0">{{Carbon::parse($userDevice->purchase_date)->addMonth($userDevice->warranty)->format('Y-m-d')}}</h5>
+                                                <span class="remaining-date font-xs">{{Carbon::parse($userDevice->purchase_date)->addMonth($userDevice->warranty)->diffInMonths(now()->format('Y-m-d'))}} شهر و {{Carbon::parse($userDevice->purchase_date)->addMonth($userDevice->warranty)->diffInDays(now()->format('Y-m-d')) %30}} أيام</span>
                                             </td>
 
-                                            <td class="font-xs py-3 bordered">{{$userDevice->pivot->notes}}</td>
+                                            <td class="font-xs py-3 bordered">{{$userDevice->notes}}</td>
 
                                             <td class="border-0">
                                                 <button class="btn btn-primary text-acent" type="button" data-bs-toggle="modal" data-bs-target="#guarantee_1">عرض الضمان</button>
@@ -75,19 +75,26 @@
                                                                         </div>
                                                                         <div class="col-12 mt-4 d-flex justify-content-between align-items-center">
                                                                             <span class="text-acent font-xl text-decoration-underline">{{auth()->user()->mobile}}</span>
-                                                                            <span class="text-acent font-xl">0000</span>
-                                                                            <span class="text-acent font-xl">0000</span>
-                                                                            <span class="text-acent font-xl">{{Carbon::now()->year}}</span>
+                                                                            <span class="text-acent font-xl">{{Carbon::parse($userDevice->purchase_date)->format('d')}}</span>
+                                                                            <span class="text-acent font-xl">{{Carbon::parse($userDevice->purchase_date)->format('m')}}</span>
+                                                                            <span class="text-acent font-xl">{{Carbon::parse($userDevice->purchase_date)->format('Y')}}</span>
                                                                         </div>
                                                                         <div class="col-6 mt-4 text-start">
-                                                                            <span class="text-acent font-regular direction-ltr">VALID THRU <i class="fas fa-caret-right mx-2"></i> <span class="text-acent font-regular">{{Carbon::parse($userDevice->pivot->purchase_date)->addMonth($userDevice->warranty)->format('Y-m')}}</span> </span>
+                                                                            <span class="text-acent font-regular direction-ltr">VALID THRU <i class="fas fa-caret-right mx-2"></i> <span class="text-acent font-regular">{{Carbon::parse($userDevice->purchase_date)->addMonth($userDevice->warranty)->format('Y-m')}}</span> </span>
                                                                         </div>
                                                                         <div class="col-6 mt-4 text-end">
-                                                                            <h5 class="text-acent font-lg mb-3 direction-ltr">Device: <span class="font-lg"> {{$userDevice->name ?? ''}}</span></h5>
+                                                                            <h5 class="text-acent font-lg mb-3 direction-ltr">Device: <span class="font-lg"> {{$userDevice->device->name ?? ''}}</span></h5>
                                                                         </div>
-                                                                        <div class="col-12 text-end mt-4">
+
+                                                                        <div class="col-6 mt-4 text-start">
+                                                                            <span class="text-acent font-regular direction-ltr">{{$userDevice->city->country->name_ar ?? ''}}  / {{$userDevice->city->name_ar ?? ''}}  </span>
+                                                                        </div>
+
+
+                                                                        <div class="col-6 text-end mt-4">
                                                                             <h5 class="text-acent font-lg mb-3">{{auth()->user()->name}}</h5>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>

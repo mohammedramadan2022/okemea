@@ -14,21 +14,25 @@
                         @csrf
 
 
-                        <div class="verification-code--inputs d-flex align-items-center justify-content-center direction-ltr mb-4">
+                        <div
+                            class="verification-code--inputs d-flex align-items-center justify-content-center direction-ltr mb-4">
                             <input type="text" name="verificationCode" maxlength="4" autofocus/>
 
                         </div>
 
-                        <div class="verification-code--inputs d-flex align-items-center justify-content-center direction-ltr mb-4">
-                            <p style="color: black !important;"> <span id="timer"></span></p>
+                        <div
+                            class="verification-code--inputs d-flex align-items-center justify-content-center direction-ltr mb-4">
+                            <p style="color: black !important;"><span id="timer"></span></p>
                         </div>
-                        <div class="form-group text-center resend-link" disabled>
-                            <a href=""onclick="resendCode()"
-                               class="resend_otp   resend-link-1 text-primary letter-spacing-normal fw-bold font-regular">
+                        <div class="form-group text-center resend-link">
+                            <a href="#"
+                               id="resendButton"
+                               class="resend_otp  resend-link-1 text-primary letter-spacing-normal fw-bold font-regular">
                                 اعاده ارسال الكود</a>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn bg-primary text-acent letter-spacing-normal mt-3 form-control">
+                            <button type="submit"
+                                    class="btn bg-primary text-acent letter-spacing-normal mt-3 form-control">
                                 تحقق
                             </button>
                         </div>
@@ -47,9 +51,20 @@
 @section('scripts')
 
     <script>
+        $(document).ready(function () {
+            var resendButton = document.getElementById('resendButton');
+            $('#resendButton').prop('disabled', true);
+            resendButton.style.cursor = "not-allowed"; // Set cursor style to not-allowed during countdown
+
+
+        })
         var countdownTimer;
 
         function startCountdownTimer(duration, display) {
+            var resendButton = document.getElementById('resendButton');
+            $('#resendButton').prop('disabled', true);
+
+            // resendButton.style.cursor = "not-allowed"; // Set cursor style to not-allowed during countdown
 
             var timer = duration, minutes, seconds;
             countdownTimer = setInterval(function () {
@@ -61,19 +76,27 @@
 
                 display.textContent = minutes + ":" + seconds;
 
-                if (--timer < 0) {
+                if (timer <= 0) {
                     clearInterval(countdownTimer);
-                    document.getElementById("verificationCodeForm").submit();
+                    $('#resendButton').prop('disabled', false);
+
+                    resendButton.style.cursor = "pointer"; // Set cursor style back to pointer when countdown is over
+                } else {
+                    timer--;
                 }
             }, 1000);
         }
 
+
+        $(document).on('click','#resendButton' , function (e){
+            e.preventDefault();
+            resendCode();
+
+        })
+
         function resendCode() {
 
             var userId = $('#user_id').val();
-
-
-
 
             var route = "{{route('ajax-sendVerificationCode')}}";
             var CSRF_TOKEN = "{{csrf_token()}}";
@@ -82,25 +105,22 @@
                 url: route,
                 type: "get",
                 dataType: "json",
-                data: {_token: CSRF_TOKEN , 'user_id': userId},
+                data: {_token: CSRF_TOKEN, 'user_id': userId},
                 success: function (response) {
                     console.log(response)
+                    $('#resendButton').prop('disabled', true);
 
+                    clearInterval(countdownTimer);
+                    startCountdownTimer(60, document.getElementById("timer"));
                 }
             });
 
 
-
-
-
-
-            clearInterval(countdownTimer);
-            startCountdownTimer(120, document.getElementById("timer"));
         }
     </script>
 
     <script>
-        startCountdownTimer(120, document.getElementById("timer"));
+        startCountdownTimer(60, document.getElementById("timer"));
     </script>
 @endsection
 

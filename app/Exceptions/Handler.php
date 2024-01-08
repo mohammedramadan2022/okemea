@@ -42,7 +42,7 @@ class Handler extends ExceptionHandler
 
 
             default:
-                $login = 'login';
+                $login = 'auth.login';
                 break;
         }
 

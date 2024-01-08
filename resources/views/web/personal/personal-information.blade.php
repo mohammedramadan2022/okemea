@@ -23,36 +23,23 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-lg-9 col-xl-9 col-12">
-                    <form action="{{route('update-personal-information')}}" method="post">
+                    <form action="{{route('update-personal-information')}}" method="post" id="submitForm">
                         @csrf
-                    <div class="row d-sm-flex">
-                        <div class="col-md-3 col-lg-3 col-xl-3 col-12 order-2-sm d-flex align-items-end pb-4">
-
-
-                            <div class="clearfix"></div>
-                            <div class="form-group text-center resend-link ">
-                                <p style="color: black !important;"> <span id="timer"></span></p>
-
-                                <a href=""onclick="resendCode()"
-                                   class="resend_otp  btn bg-primary text-acent letter-spacing-normal fw-bold form-control verify   resend-link-1 text-primary letter-spacing-normal fw-bold font-regular">
-                                تحقق</a>
-                                <input type="text" class="form-control mt-3 text-center">
+                        <div class="row d-sm-flex">
+                            <div class="col-md-3 col-lg-3 col-xl-3 col-12 order-2-sm d-flex align-items-end pb-4">
 
                             </div>
-
-
-
-                        </div>
-                        <div class="col-md-9 col-lg-9 col-xl-9 col-12">
-                            <div class="mx-auto">
-                                <div class="card profile-card border-0 text-center">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="profile-picture">
-                                            <img src="{{asset('web-assets/Images/user.webp')}}" height="60px" class="of-contain" alt="">
+                            <div class="col-md-9 col-lg-9 col-xl-9 col-12">
+                                <div class="mx-auto">
+                                    <div class="card profile-card border-0 text-center">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <div class="profile-picture">
+                                                <img src="{{asset('web-assets/Images/user.webp')}}" height="60px"
+                                                     class="of-contain" alt="">
+                                            </div>
+                                            <h3 class="font-regular mt-3 fw-bold">تعديل البيانات</h3>
                                         </div>
-                                        <h3 class="font-regular mt-3 fw-bold">تعديل البيانات</h3>
-                                    </div>
-                                    <div class="form-div">
+                                        <div class="form-div">
 
                                             <div class="form-group text-start">
                                                 <label class="fw-bold fs-sm mb-1" for="name">الإسم</label>
@@ -79,7 +66,8 @@
                                                     <option selected="true" disabled="disabled" value="">إختر الدولة
                                                     </option>
                                                     @foreach($countries as $country)
-                                                        <option value="{{$country->id}}" data-country_code="{{$country->dial_code}}"
+                                                        <option value="{{$country->id}}"
+                                                                data-country_code="{{$country->dial_code}}"
                                                                 @if(auth()->user()->city->country_id == $country->id) selected @endif>{{$country->name_ar}}</option>
 
                                                     @endforeach
@@ -105,11 +93,14 @@
                                             </div>
                                             <div class="form-group text-start position-relative">
                                                 <label class="fw-bold fs-sm mb-1" for="mobile_code">رقم الجوال</label>
-                                                <input type="tel" id="mobile_code" class="form-control" value="{{auth()->user()->mobile}}" name="mobile">
+                                                <input type="tel" id="mobile_code" class="form-control"
+                                                       value="{{auth()->user()->mobile}}" name="mobile">
                                                 <select name="country_code" id="country_code">
-                                                    <option value="" selected="selected" disabled="disabled">+000</option>
+                                                    <option value="" selected="selected" disabled="disabled">+000
+                                                    </option>
                                                     @foreach($countries as $country)
-                                                        <option value="{{$country->dial_code}}">{{$country->dial_code}}</option>
+                                                        <option
+                                                            value="{{$country->dial_code}}">{{$country->dial_code}}</option>
 
                                                     @endforeach
 
@@ -120,24 +111,47 @@
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
+
+
                                             <div class="form-group">
-                                                <button type="submit"
-                                                        class="btn bg-primary text-acent form-control letter-spacing-normal">
-                                                    تعديل البيانات
-                                                </button>
+                                                <a onclick="resendCode()"
+                                                   class="btn bg-primary text-acent form-control letter-spacing-normal">
+                                                    تحقق
+                                                </a>
                                             </div>
 
+                                            <input type="hidden" name="verification_code" id="verification_code">
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-
+    <div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="otpModalLabel">Enter OTP</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">OTP</span>
+                        <input type="text" class="form-control" id="otpInput" aria-label="OTP">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="otpSubmit">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('scripts')
@@ -165,10 +179,8 @@
 
         function resendCode() {
 
-            var userId = $('#user_id').val();
-
-
-
+            event.preventDefault()
+            var userId = "{{auth()->user()->id}}"
 
             var route = "{{route('ajax-sendVerificationCode')}}";
             var CSRF_TOKEN = "{{csrf_token()}}";
@@ -177,20 +189,17 @@
                 url: route,
                 type: "get",
                 dataType: "json",
-                data: {_token: CSRF_TOKEN , 'user_id': userId},
+                data: {_token: CSRF_TOKEN, 'user_id': userId},
                 success: function (response) {
-                    console.log(response)
+                    $('#otpModal').modal('toggle');
+
 
                 }
             });
 
 
-
-
-
-
-            clearInterval(countdownTimer);
-            startCountdownTimer(120, document.getElementById("timer"));
+            // clearInterval(countdownTimer);
+            // startCountdownTimer(120, document.getElementById("timer"));
         }
     </script>
 
@@ -226,4 +235,24 @@
             });
         }
     </script>
+
+
+    <script>
+        document.getElementById('otpSubmit').addEventListener('click', function () {
+            var otp = document.getElementById('otpInput').value;
+            if (otp.length !== 4) {
+                alert('Invalid OTP');
+            } else {
+                $('#verification_code').val(otp)
+                $('#submitForm').submit();
+                $('#otpModal').modal('hide');
+
+            }
+        });
+    </script>
+
+
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+
+    {!! JsValidator::formRequest('App\Http\Requests\Web\Personal\UpdatePersonalInformationRequest') !!}
 @endsection

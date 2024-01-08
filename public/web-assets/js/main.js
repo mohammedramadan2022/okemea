@@ -1,21 +1,21 @@
-$('.resend_otp').click(function(e){
-    e.preventDefault();
-    var seconds = 60;
-    $('.resend_otp').css('pointer-events', 'none');
-    function tick() {
-        var counter = document.getElementById("counter");
-        seconds--;
-        counter.innerHTML =
-            "يمكنك إعادة الإرسال بعد " + "00:" + (seconds < 10 ? "0" : "") + String(seconds);
-        if (seconds > 0) {
-            setTimeout(tick, 1000);
-        } else {
-            $('.resend_otp').css('pointer-events', 'unset');
-            document.getElementById("counter").innerHTML = "";
-        }
-    }
-    tick();
-});
+// $('.resend_otp').click(function(e){
+//     e.preventDefault();
+//     var seconds = 60;
+//     $('.resend_otp').css('pointer-events', 'none');
+//     function tick() {
+//         var counter = document.getElementById("counter");
+//         seconds--;
+//         counter.innerHTML =
+//             "يمكنك إعادة الإرسال بعد " + "00:" + (seconds < 10 ? "0" : "") + String(seconds);
+//         if (seconds > 0) {
+//             setTimeout(tick, 1000);
+//         } else {
+//             $('.resend_otp').css('pointer-events', 'unset');
+//             document.getElementById("counter").innerHTML = "";
+//         }
+//     }
+//     tick();
+// });
 
 
 $(document).ready(function() {
